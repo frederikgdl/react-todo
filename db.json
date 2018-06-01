@@ -1,0 +1,24 @@
+{
+  "items": [
+    {
+      "checked": false,
+      "content": "Lage todo-app",
+      "id": "L3zii6m"
+    },
+    {
+      "checked": true,
+      "content": "Dra til Brilleland",
+      "id": "FgYzQeM"
+    },
+    {
+      "checked": true,
+      "content": "Ringe Get igjen",
+      "id": "K8siM6y"
+    },
+    {
+      "checked": false,
+      "content": "Klippe meg",
+      "id": "FR5w4yv"
+    }
+  ]
+}
