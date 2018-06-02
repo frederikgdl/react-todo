@@ -13,9 +13,7 @@ const target = document.querySelector('#root')
 render(
     <Provider store={store}>
         <ConnectedRouter history={history}>
-            <React.Fragment>
-                <App />
-            </React.Fragment>
+            <App />
         </ConnectedRouter>
     </Provider>,
     target
