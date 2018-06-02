@@ -1,18 +1,24 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
+import { render } from 'react-dom'
 import { Provider } from 'react-redux'
-import configureStore from './store'
+import { ConnectedRouter } from 'react-router-redux'
+import registerServiceWorker from './registerServiceWorker'
+import store, { history } from './store'
+import App from './App'
 
 import 'bulma/css/bulma.css'
-import './index.css'
-import App from './App'
-import registerServiceWorker from './registerServiceWorker'
 
-ReactDOM.render(
-    <Provider store={configureStore()}>
-        <App />
+const target = document.querySelector('#root')
+
+render(
+    <Provider store={store}>
+        <ConnectedRouter history={history}>
+            <React.Fragment>
+                <App />
+            </React.Fragment>
+        </ConnectedRouter>
     </Provider>,
-    document.getElementById('root')
+    target
 )
 
 registerServiceWorker()

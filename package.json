@@ -1,7 +1,9 @@
 {
   "name": "react-todo",
   "version": "0.0.1",
-  "private": true,
+  "description": "Todo-app in React with Redux and Router",
+  "author": "frederikgdl",
+  "license": "MIT",
   "scripts": {
     "start": "npm run start-with-server",
     "start-react": "react-scripts start",
@@ -14,11 +16,16 @@
   },
   "dependencies": {
     "bulma": "^0.7.1",
+    "history": "^4.7.2",
+    "prop-types": "^15.6.1",
     "react": "^16.4.0",
     "react-dom": "^16.4.0",
     "react-redux": "^5.0.7",
+    "react-router-dom": "^4.3.0-rc.3",
+    "react-router-redux": "^5.0.0-alpha.9",
     "react-scripts": "1.1.4",
-    "redux": "^4.0.0",
+    "redux": "^3.1.0",
+    "redux-devtools-extension": "^2.13.2",
     "redux-thunk": "^2.3.0"
   },
   "devDependencies": {
