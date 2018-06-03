@@ -1,13 +1,17 @@
+import { filters } from '../constants'
+
 import {
     FETCH_ITEMS_REQUEST,
     FETCH_ITEMS_SUCCESS,
-    FETCH_ITEMS_FAILURE
+    FETCH_ITEMS_FAILURE,
+    FILTER_ITEMS
 } from '../actions'
 
 const initialState = {
     items: [],
     pending: false,
-    error: null
+    error: null,
+    filter: filters.ALL.value
 }
 
 const reducer = (state = initialState, action) => {
@@ -29,6 +33,11 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 pending: false,
                 error: action.error
+            }
+        case FILTER_ITEMS:
+            return {
+                ...state,
+                filter: action.filter
             }
         default:
             return state

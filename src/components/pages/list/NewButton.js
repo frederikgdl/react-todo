@@ -5,8 +5,8 @@ import { push } from 'react-router-redux'
 
 const NewButton = ({ goToPath }) => (
     <button
-        onClick={() => goToPath('/new')}
         className="button is-primary is-medium"
+        onClick={() => goToPath('/new')}
     >
         + Add todo
     </button>

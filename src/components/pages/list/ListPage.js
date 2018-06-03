@@ -1,11 +1,11 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
 
 import { Controls } from './Controls'
 import ItemList from './ItemList'
 import { fetchItems } from '../../../api'
 
-class ListPage extends Component {
+class ListPage extends PureComponent {
     componentDidMount() {
         this.props.fetchItems()
     }
