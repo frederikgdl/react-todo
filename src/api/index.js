@@ -7,25 +7,22 @@ import {
 const serverUrl = 'http://localhost:4000'
 const fetchItemsUrl = `${serverUrl}/items`
 
-export const fetchItems = () => dispatch => {
-    dispatch(fetchItemsRequest())
+export const fetchItems = () => {
+    return async dispatch => {
+        dispatch(fetchItemsRequest())
+        try {
+            const data = await asyncFetchItems()
+            dispatch(onFetchItemsSuccess(data))
+        } catch (e) {
+            dispatch(onFetchItemsFailure(e))
+        }
+    }
+}
 
-    return fetch(fetchItemsUrl)
-        .then(
-            response => {
-                if (!response.ok) {
-                    throw new Error(response.statusText)
-                }
-                return response.json()
-            },
-            error => {
-                throw new Error(error)
-            }
-        )
-        .then(json => {
-            dispatch(onFetchItemsSuccess(json))
-        })
-        .catch(error => {
-            dispatch(onFetchItemsFailure(error))
-        })
+const asyncFetchItems = async () => {
+    const response = await fetch(fetchItemsUrl)
+    if (!response.ok) {
+        throw new Error(response.statusText)
+    }
+    return response.json()
 }
