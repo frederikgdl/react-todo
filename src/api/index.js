@@ -1,7 +1,10 @@
 import {
     fetchItemsRequest,
     onFetchItemsSuccess,
-    onFetchItemsFailure
+    onFetchItemsFailure,
+    deleteItemRequest,
+    onDeleteItemSuccess,
+    onDeleteItemFailure
 } from '../actions'
 
 const serverUrl = 'http://localhost:4000'
@@ -19,6 +22,25 @@ export const fetchItems = () => async dispatch => {
 
 const asyncFetchItems = async () => {
     const response = await fetch(fetchItemsUrl)
+    if (!response.ok) {
+        throw new Error(response.statusText)
+    }
+    return response.json()
+}
+
+export const deleteItem = itemId => async dispatch => {
+    dispatch(deleteItemRequest())
+    try {
+        await asyncDeleteItem(itemId)
+        dispatch(onDeleteItemSuccess(itemId))
+    } catch (e) {
+        dispatch(onDeleteItemFailure())
+    }
+}
+
+const asyncDeleteItem = async itemId => {
+    const url = `${fetchItemsUrl}/${itemId}`
+    const response = await fetch(url, { method: 'delete' })
     if (!response.ok) {
         throw new Error(response.statusText)
     }

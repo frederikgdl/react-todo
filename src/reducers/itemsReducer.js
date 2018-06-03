@@ -4,7 +4,10 @@ import {
     FETCH_ITEMS_REQUEST,
     FETCH_ITEMS_SUCCESS,
     FETCH_ITEMS_FAILURE,
-    FILTER_ITEMS
+    FILTER_ITEMS,
+    DELETE_ITEM_REQUEST,
+    DELETE_ITEM_SUCCESS,
+    DELETE_ITEM_FAILURE
 } from '../actions'
 
 const initialState = {
@@ -39,6 +42,26 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 filter: action.filter
             }
+        case DELETE_ITEM_REQUEST:
+            return {
+                ...state,
+                pending: true
+            }
+        case DELETE_ITEM_SUCCESS: {
+            return {
+                ...state,
+                items: state.items.filter(item => item.id !== action.itemId),
+                pending: false,
+                error: null
+            }
+        }
+        case DELETE_ITEM_FAILURE: {
+            return {
+                ...state,
+                pending: false,
+                error: action.error
+            }
+        }
         default:
             return state
     }

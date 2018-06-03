@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
 import { filters } from '../../../constants'
+import { deleteItem } from '../../../api'
 import { ItemRow } from './ItemRow'
 
 const filterItem = (item, filter) => {
@@ -18,7 +19,7 @@ const filterItem = (item, filter) => {
     }
 }
 
-const ItemList = ({ items, error, filter }) => (
+const ItemList = ({ items, error, filter, deleteItem }) => (
     <div>
         {!!error && <div>{error.message}</div>}
         {items
@@ -28,7 +29,7 @@ const ItemList = ({ items, error, filter }) => (
                     key={item.id}
                     item={item}
                     onCheckItem={() => {}}
-                    onDeleteItem={() => {}}
+                    onDeleteItem={deleteItem}
                 />
             ))}
     </div>
@@ -43,7 +44,8 @@ ItemList.propTypes = {
     error: PropTypes.shape({
         message: PropTypes.string
     }),
-    filter: PropTypes.string.isRequired
+    filter: PropTypes.string.isRequired,
+    deleteItem: PropTypes.func.isRequired
 }
 
 export default connect(
@@ -52,5 +54,7 @@ export default connect(
         error: state.items.error,
         filter: state.items.filter
     }),
-    {}
+    {
+        deleteItem
+    }
 )(ItemList)
