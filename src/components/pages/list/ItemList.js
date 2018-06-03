@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
 import { filters } from '../../../constants'
-import { deleteItem } from '../../../api'
+import { checkItem, deleteItem } from '../../../api'
 import { ItemRow } from './ItemRow'
 
 const filterItem = (item, filter) => {
@@ -19,7 +19,7 @@ const filterItem = (item, filter) => {
     }
 }
 
-const ItemList = ({ items, error, filter, deleteItem }) => (
+const ItemList = ({ items, error, filter, checkItem, deleteItem }) => (
     <div>
         {!!error && <div>{error.message}</div>}
         {items
@@ -28,7 +28,7 @@ const ItemList = ({ items, error, filter, deleteItem }) => (
                 <ItemRow
                     key={item.id}
                     item={item}
-                    onCheckItem={() => {}}
+                    onCheckItem={checkItem}
                     onDeleteItem={deleteItem}
                 />
             ))}
@@ -55,6 +55,7 @@ export default connect(
         filter: state.items.filter
     }),
     {
+        checkItem,
         deleteItem
     }
 )(ItemList)

@@ -9,7 +9,7 @@ export const ItemRow = ({ item, onCheckItem, onDeleteItem }) => (
             type="checkbox"
             className={'todo-checkbox' + (item.checked ? ' is-checked' : '')}
             checked={item.checked}
-            onChange={() => onCheckItem(item.id)}
+            onChange={() => onCheckItem(item)}
         />
         <div
             className={

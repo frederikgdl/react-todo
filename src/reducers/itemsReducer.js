@@ -7,7 +7,10 @@ import {
     FILTER_ITEMS,
     DELETE_ITEM_REQUEST,
     DELETE_ITEM_SUCCESS,
-    DELETE_ITEM_FAILURE
+    DELETE_ITEM_FAILURE,
+    CHECK_ITEM_REQUEST,
+    CHECK_ITEM_SUCCESS,
+    CHECK_ITEM_FAILURE
 } from '../actions'
 
 const initialState = {
@@ -56,6 +59,30 @@ const reducer = (state = initialState, action) => {
             }
         }
         case DELETE_ITEM_FAILURE: {
+            return {
+                ...state,
+                pending: false,
+                error: action.error
+            }
+        }
+        case CHECK_ITEM_REQUEST: {
+            return {
+                ...state,
+                pending: true
+            }
+        }
+        case CHECK_ITEM_SUCCESS: {
+            return {
+                ...state,
+                items: state.items.map(
+                    item =>
+                        item.id === action.item.id ? { ...action.item } : item
+                ),
+                pending: false,
+                error: null
+            }
+        }
+        case CHECK_ITEM_FAILURE: {
             return {
                 ...state,
                 pending: false,
