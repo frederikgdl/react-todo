@@ -1,3 +1,5 @@
+import { push } from 'react-router-redux'
+
 import {
     fetchItemsRequest,
     onFetchItemsSuccess,
@@ -7,11 +9,14 @@ import {
     onDeleteItemFailure,
     checkItemRequest,
     onCheckItemSuccess,
-    onCheckItemFailure
+    onCheckItemFailure,
+    addItemRequest,
+    onAddItemSuccess,
+    onAddItemFailure
 } from '../actions'
 
 const serverUrl = 'http://localhost:4000'
-const fetchItemsUrl = `${serverUrl}/items`
+const itemsUrl = `${serverUrl}/items`
 
 export const fetchItems = () => async dispatch => {
     dispatch(fetchItemsRequest())
@@ -24,7 +29,7 @@ export const fetchItems = () => async dispatch => {
 }
 
 const asyncFetchItems = async () => {
-    const response = await fetch(fetchItemsUrl)
+    const response = await fetch(itemsUrl)
     if (!response.ok) {
         throw new Error(response.statusText)
     }
@@ -42,7 +47,7 @@ export const checkItem = item => async dispatch => {
 }
 
 const asyncCheckItem = async item => {
-    const url = `${fetchItemsUrl}/${item.id}`
+    const url = `${itemsUrl}/${item.id}`
     const response = await fetch(url, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
@@ -65,8 +70,31 @@ export const deleteItem = itemId => async dispatch => {
 }
 
 const asyncDeleteItem = async itemId => {
-    const url = `${fetchItemsUrl}/${itemId}`
+    const url = `${itemsUrl}/${itemId}`
     const response = await fetch(url, { method: 'delete' })
+    if (!response.ok) {
+        throw new Error(response.statusText)
+    }
+    return response.json()
+}
+
+export const addItem = newContent => async dispatch => {
+    dispatch(addItemRequest())
+    try {
+        const newItem = await asyncAddItem(newContent)
+        await dispatch(onAddItemSuccess(newItem))
+        dispatch(push('/'))
+    } catch (e) {
+        dispatch(onAddItemFailure(e))
+    }
+}
+
+const asyncAddItem = async newContent => {
+    const response = await fetch(itemsUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ checked: false, content: newContent })
+    })
     if (!response.ok) {
         throw new Error(response.statusText)
     }

@@ -8,6 +8,9 @@ export const DELETE_ITEM_FAILURE = 'DELETE_ITEM_FAILURE'
 export const CHECK_ITEM_REQUEST = 'CHECK_ITEM_REQUEST'
 export const CHECK_ITEM_SUCCESS = 'CHECK_ITEM_SUCCESS'
 export const CHECK_ITEM_FAILURE = 'CHECK_ITEM_FAILURE'
+export const ADD_ITEM_REQUEST = 'ADD_ITEM_REQUEST'
+export const ADD_ITEM_SUCCESS = 'ADD_ITEM_SUCCESS'
+export const ADD_ITEM_FAILURE = 'ADD_ITEM_FAILURE'
 
 export const fetchItemsRequest = () => ({
     type: FETCH_ITEMS_REQUEST
@@ -53,5 +56,19 @@ export const onDeleteItemSuccess = itemId => ({
 
 export const onDeleteItemFailure = error => ({
     type: DELETE_ITEM_FAILURE,
+    error
+})
+
+export const addItemRequest = () => ({
+    type: ADD_ITEM_REQUEST
+})
+
+export const onAddItemSuccess = newItem => ({
+    type: ADD_ITEM_SUCCESS,
+    newItem
+})
+
+export const onAddItemFailure = error => ({
+    type: ADD_ITEM_FAILURE,
     error
 })

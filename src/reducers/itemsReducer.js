@@ -10,7 +10,10 @@ import {
     DELETE_ITEM_FAILURE,
     CHECK_ITEM_REQUEST,
     CHECK_ITEM_SUCCESS,
-    CHECK_ITEM_FAILURE
+    CHECK_ITEM_FAILURE,
+    ADD_ITEM_REQUEST,
+    ADD_ITEM_SUCCESS,
+    ADD_ITEM_FAILURE
 } from '../actions'
 
 const initialState = {
@@ -83,6 +86,27 @@ const reducer = (state = initialState, action) => {
             }
         }
         case CHECK_ITEM_FAILURE: {
+            return {
+                ...state,
+                pending: false,
+                error: action.error
+            }
+        }
+        case ADD_ITEM_REQUEST: {
+            return {
+                ...state,
+                pending: true
+            }
+        }
+        case ADD_ITEM_SUCCESS: {
+            return {
+                ...state,
+                items: [...state.items, action.newItem],
+                pending: false,
+                error: null
+            }
+        }
+        case ADD_ITEM_FAILURE: {
             return {
                 ...state,
                 pending: false,
