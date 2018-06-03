@@ -1,34 +1,28 @@
-import React from 'react'
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
 
 import { Controls } from './Controls'
-import { ItemList } from './ItemList'
+import ItemList from './ItemList'
+import { fetchItems } from '../../../api'
 
-export const ListPage = () => (
-    <div className="box is-shadowless">
-        <Controls />
-        <ItemList items={items} />
-    </div>
-)
-
-const items = [
-    {
-        checked: false,
-        content: 'Lage todo-app',
-        id: 'L3zii6m'
-    },
-    {
-        checked: true,
-        content: 'Dra til Brilleland',
-        id: 'FgYzQeM'
-    },
-    {
-        checked: true,
-        content: 'Ringe Get igjen',
-        id: 'K8siM6y'
-    },
-    {
-        checked: false,
-        content: 'Klippe meg',
-        id: 'FR5w4yv'
+class ListPage extends Component {
+    componentDidMount() {
+        this.props.fetchItems()
     }
-]
+
+    render() {
+        return (
+            <div className="box is-shadowless">
+                <Controls />
+                <ItemList />
+            </div>
+        )
+    }
+}
+
+export default connect(
+    null,
+    {
+        fetchItems
+    }
+)(ListPage)
