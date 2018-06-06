@@ -7,7 +7,6 @@
     ],
     "plugins": ["jsx-a11y", "prettier"],
     "rules": {
-        "prettier/prettier": "warn",
-        "quotes": ["warn", "single"]
+        "prettier/prettier": "warn"
     }
 }
