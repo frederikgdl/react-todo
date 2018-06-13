@@ -7,7 +7,7 @@
   "scripts": {
     "start": "npm run start-with-server",
     "start-react": "react-scripts start",
-    "server": "json-server --watch db.json --port 4000",
+    "server": "json-server --watch db.json --port 8080",
     "start-with-server": "concurrently --kill-others \"npm run start-react\" \"npm run server\"",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",

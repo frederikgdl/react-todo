@@ -15,7 +15,7 @@ import {
     onAddItemFailure
 } from '../actions'
 
-const serverUrl = 'http://localhost:4000'
+const serverUrl = 'http://localhost:8080'
 const itemsUrl = `${serverUrl}/items`
 
 export const fetchItems = () => async dispatch => {
