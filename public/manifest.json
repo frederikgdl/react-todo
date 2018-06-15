@@ -1,6 +1,6 @@
 {
   "short_name": "React Todo",
-  "name": "Todo-app in Elm",
+  "name": "Todo-app in React",
   "icons": [
     {
       "src": "favicon.ico",
